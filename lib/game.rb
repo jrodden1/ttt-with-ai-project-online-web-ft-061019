@@ -10,6 +10,17 @@ class Game
       self.player_2 = player_2_obj
       self.players << self.player_2
       self.board = board_obj
+      
+  
+      if computer = self.players.find {|player| player.class == Computer}
+         computer.tap do |computer_player| 
+            if computer_player.token == player_1.token
+               computer_player.player_number = 1
+            elsif computer_player.token == player_2.token
+               computer_player.player_number = 2
+            end
+         end
+      end
       self.current_player = player_1
    end
 
@@ -63,7 +74,7 @@ class Game
    def over?
       # returns true for a draw
       # returns true for a win
-      self.draw? || self.won?
+      self.won? || self.draw?
    end
 
    def turn
@@ -77,7 +88,6 @@ class Game
             self.board.cells[indexed_move] = self.current_player.token
             #I can make this into a ternary REFACTOR
             if self.current_player == player_1
-               binding.pry
                self.current_player = player_2
             else
                self.current_player = player_1
@@ -89,7 +99,18 @@ class Game
    end
 
    def play 
-      self.current_player.move(self.board)
+      is_over = self.over?
+      until is_over
+         self.turn
+         is_over = self.over?
+      end
+
+      if self.winner
+         puts "Congratulations #{self.winner}!"
+      else
+         puts "Cat's Game!"
+      end
+
    end
 
 
