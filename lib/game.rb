@@ -67,7 +67,7 @@ class Game
    end
 
    def turn
-      player_move = self.current_player.move(board)
+      player_move = self.current_player.move(self.board)
       indexed_move = self.board.convert_to_arr_index(player_move)
       move_is_valid = nil
       until move_is_valid
@@ -89,7 +89,7 @@ class Game
    end
 
    def play 
-
+      self.current_player.move(self.board)
    end
 
 
