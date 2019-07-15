@@ -1,4 +1,8 @@
+So for some reason, the game board is not updating.  Need to figure out when actually running the CLI that it doesn't update (maybe check on Attr_accessor area and see if something isn't actually writing)
+
 Ideas for AI.  
+
+Super Lame AI -> rand(0..8).to_s
 
 Computer Player iterates through the WIN_COMBINATIONS array and checks if a spot is taken and if it is taken by its own token (x or O)
 

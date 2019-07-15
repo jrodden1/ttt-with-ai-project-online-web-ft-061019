@@ -13,12 +13,13 @@ class Board
    end
 
    def display
+      binding.pry
       puts <<~BOARD
-       #{cells[TLC]} | #{cells[TS]} | #{cells[TRC]} 
+       #{self.cells[TLC]} | #{self.cells[TS]} | #{self.cells[TRC]} 
       -----------
-       #{cells[MLS]} | #{cells[MC]} | #{cells[MRS]} 
+       #{self.cells[MLS]} | #{self.cells[MC]} | #{self.cells[MRS]} 
       -----------
-       #{cells[BLC]} | #{cells[BS]} | #{cells[BRC]} 
+       #{self.cells[BLC]} | #{self.cells[BS]} | #{self.cells[BRC]} 
       BOARD
    end
 

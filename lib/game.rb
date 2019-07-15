@@ -11,17 +11,15 @@ class Game
       self.players << self.player_2
       self.board = board_obj
       
-  
       if computer = self.players.find {|player| player.class == Computer}
-         computer.tap do |computer_player| 
-            if computer_player.token == player_1.token
-               computer_player.player_number = 1
-            elsif computer_player.token == player_2.token
-               computer_player.player_number = 2
-            end
+         if computer.token == player_1.token
+            computer.player_number = 1
+         elsif computer.token == player_2.token
+            computer.player_number = 2
          end
       end
       self.current_player = player_1
+      self.turn
    end
 
    def current_player
@@ -78,6 +76,8 @@ class Game
    end
 
    def turn
+      self.board.display
+      puts "Type in the numeric value of the cell you'd like to play in."
       player_move = self.current_player.move(self.board)
       indexed_move = self.board.convert_to_arr_index(player_move)
       move_is_valid = nil
@@ -85,7 +85,7 @@ class Game
          move_is_valid = self.board.valid_move?(player_move)
             
          if move_is_valid
-            self.board.cells[indexed_move] = self.current_player.token
+            self.board.update(player_move, self.current_player)
             #I can make this into a ternary REFACTOR
             if self.current_player == player_1
                self.current_player = player_2
